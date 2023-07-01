@@ -5,7 +5,7 @@ export const options = {
   executor: 'ramping-arrival-rate',
   stages: [
     {
-      duration: '2h',
+      duration: '5m',
       target: 20000,
     },
   ],
