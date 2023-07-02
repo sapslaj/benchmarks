@@ -4,6 +4,11 @@ A server that returns `hello world` as an HTTP 200 response.
 
 ## Results
 
+```shell
+$ go version
+go version go1.20.4 linux/amd64
+```
+
 ### `go`
 
 ```
@@ -35,6 +40,8 @@ default ✓ [======================================] 00000/20000 VUs  5m0s
 
 ### `nginx`
 
+Test was done using `nginx` from Ubuntu repos (`1.18.0-6ubuntu14.3`) due to Docker proxy overhead skewing results.
+
 ```
      ✗ is status 200
       ↳  99% — ✓ 17948654 / ✗ 3353
@@ -64,12 +71,15 @@ running (5m30.0s), 00000/20000 VUs, 17952007 complete and 701 interrupted iterat
 default ✓ [======================================] 00702/20000 VUs  5m0s
 ```
 
-Notes:
-
 - seems to max out at ~18k
 - `2023/07/01 23:54:50 [warn] 31#31: 1024 worker_connections are not enough, reusing connections`
 
 ### `node-express`
+
+```shell
+$ node --version
+v16.20.0
+```
 
 ```
      ✓ is status 200
@@ -97,3 +107,143 @@ Notes:
 running (5m02.9s), 00000/20000 VUs, 2121397 complete and 0 interrupted iterations
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
+
+### `python-fastapi`
+
+```shell
+$ python --version
+Python 3.10.1
+```
+
+```
+     ✗ is status 200
+      ↳  12% — ✓ 808455 / ✗ 5715640
+     ✗ verify homepage text
+      ↳  12% — ✓ 808455 / ✗ 5715640
+
+     checks.........................: 12.39%  ✓ 1616910      ✗ 11431280
+     data_received..................: 113 MB  377 kB/s
+     data_sent......................: 520 MB  1.7 MB/s
+     http_req_blocked...............: avg=55.8µs   min=551ns    med=52.36µs  max=39.4ms   p(90)=67.85µs  p(95)=75.29µs
+     http_req_connecting............: avg=38.57µs  min=0s       med=34.62µs  max=39.37ms  p(90)=45.04µs  p(95)=49.63µs
+     http_req_duration..............: avg=37.95ms  min=0s       med=2.81ms   max=543.04ms p(90)=218.7ms  p(95)=292.72ms
+       { expected_response:true }...: avg=265.26ms min=223.8µs  med=278.16ms max=543.04ms p(90)=342.2ms  p(95)=370.33ms
+     http_req_failed................: 87.60%  ✓ 5715640      ✗ 808455
+     http_req_receiving.............: avg=2.19µs   min=0s       med=0s       max=10.81ms  p(90)=13.83µs  p(95)=17.19µs
+     http_req_sending...............: avg=13.71µs  min=0s       med=10.67µs  max=15.65ms  p(90)=15.9µs   p(95)=20.53µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=37.93ms  min=0s       med=2.8ms    max=543.01ms p(90)=218.67ms p(95)=292.7ms
+     http_reqs......................: 6524095 21712.840179/s
+     iteration_duration.............: avg=271.63ms min=114.76µs med=190.68ms max=2.38s    p(90)=721.81ms p(95)=862.24ms
+     iterations.....................: 6524095 21712.840179/s
+     vus............................: 17809   min=4          max=19937
+     vus_max........................: 20000   min=20000      max=20000
+
+
+running (5m00.5s), 00000/20000 VUs, 6524095 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
+- falls over at 1k (ulimit?)
+
+Rerun with `gunicorn -b 127.0.0.1:8080 -w 16 -k uvicorn.workers.UvicornWorker main:app`:
+
+```
+     ✗ is status 200
+      ↳  97% — ✓ 7358118 / ✗ 216206
+     ✗ verify homepage text
+      ↳  97% — ✓ 7358118 / ✗ 216206
+
+     checks.........................: 97.14%  ✓ 14716236     ✗ 432412
+     data_received..................: 1.0 GB  3.4 MB/s
+     data_sent......................: 597 MB  2.0 MB/s
+     http_req_blocked...............: avg=320.52µs min=601ns    med=2.36µs   max=1.93s    p(90)=3.46µs   p(95)=5.21µs
+     http_req_connecting............: avg=302.61µs min=0s       med=0s       max=675.35ms p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=261.95ms min=0s       med=197.82ms max=2.94s    p(90)=612.93ms p(95)=748.82ms
+       { expected_response:true }...: avg=269.58ms min=171.11µs med=206.37ms max=2.94s    p(90)=619.29ms p(95)=753.55ms
+     http_req_failed................: 2.85%   ✓ 216206       ✗ 7358118
+     http_req_receiving.............: avg=82.22µs  min=0s       med=16.22µs  max=2.28s    p(90)=25.43µs  p(95)=59.1µs
+     http_req_sending...............: avg=261.57µs min=0s       med=7.83µs   max=2.12s    p(90)=42.01µs  p(95)=191.53µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=261.6ms  min=0s       med=197.48ms max=1.96s    p(90)=612.5ms  p(95)=748.33ms
+     http_reqs......................: 7574324 25192.376485/s
+     iteration_duration.............: avg=385.47ms min=162.9µs  med=319.97ms max=3.38s    p(90)=753.61ms p(95)=884.92ms
+     iterations.....................: 7574324 25192.376485/s
+     vus............................: 19875   min=6          max=19875
+     vus_max........................: 20000   min=20000      max=20000
+
+
+running (5m00.7s), 00000/20000 VUs, 7574324 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
+- this time falls over at 12k
+
+```
+     ✗ is status 200
+      ↳  99% — ✓ 8050204 / ✗ 411
+     ✗ verify homepage text
+      ↳  99% — ✓ 8050204 / ✗ 411
+
+     checks.........................: 99.99%  ✓ 16100408     ✗ 822
+     data_received..................: 1.1 GB  3.8 MB/s
+     data_sent......................: 644 MB  2.1 MB/s
+     http_req_blocked...............: avg=64.36µs  min=641ns    med=2.36µs   max=813.11ms p(90)=3.3µs    p(95)=3.82µs
+     http_req_connecting............: avg=58.75µs  min=0s       med=0s       max=813.01ms p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=234.57ms min=0s       med=161.25ms max=3.33s    p(90)=577.79ms p(95)=745.1ms
+       { expected_response:true }...: avg=234.59ms min=170.45µs med=161.27ms max=3.33s    p(90)=577.79ms p(95)=745.11ms
+     http_req_failed................: 0.00%   ✓ 411          ✗ 8050204
+     http_req_receiving.............: avg=94.1µs   min=0s       med=16.18µs  max=2.84s    p(90)=25.42µs  p(95)=60.15µs
+     http_req_sending...............: avg=329.88µs min=0s       med=7.9µs    max=1.74s    p(90)=35.57µs  p(95)=259.3µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=234.15ms min=0s       med=160.65ms max=1.98s    p(90)=577.33ms p(95)=744.61ms
+     http_reqs......................: 8050615 26798.713878/s
+     iteration_duration.............: avg=360.39ms min=5.99ms   med=288.91ms max=4.43s    p(90)=720.16ms p(95)=882.24ms
+     iterations.....................: 8050615 26798.713878/s
+     vus............................: 17778   min=5          max=19938
+     vus_max........................: 20000   min=20000      max=20000
+
+
+running (5m00.4s), 00000/20000 VUs, 8050615 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
+- this time falls over at 16k
+
+### `ruby-sinatra`
+
+```
+$ ruby --version
+ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]
+```
+
+```
+     ✗ is status 200
+      ↳  14% — ✓ 16933 / ✗ 100655
+     ✗ verify homepage text
+      ↳  14% — ✓ 16933 / ✗ 100655
+
+     checks.........................: 14.40% ✓ 33866      ✗ 201310
+     data_received..................: 3.2 MB 9.6 kB/s
+     data_sent......................: 1.9 MB 5.8 kB/s
+     http_req_blocked...............: avg=127.96ms min=0s       med=0s      max=15.49s   p(90)=2.46µs   p(95)=129.48µs
+     http_req_connecting............: avg=127.96ms min=0s       med=0s      max=15.49s   p(90)=0s       p(95)=86.7µs
+     http_req_duration..............: avg=3.64s    min=0s       med=0s      max=1m0s     p(90)=557.29µs p(95)=55.92s
+       { expected_response:true }...: avg=6.99s    min=185.11µs med=423.9µs max=1m0s     p(90)=52.82s   p(95)=58.8s
+     http_req_failed................: 85.59% ✓ 100655     ✗ 16933
+     http_req_receiving.............: avg=4.53µs   min=0s       med=0s      max=194.67µs p(90)=25.71µs  p(95)=31.59µs
+     http_req_sending...............: avg=3.74µs   min=0s       med=0s      max=1.57ms   p(90)=10.9µs   p(95)=25.39µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=3.64s    min=0s       med=0s      max=1m0s     p(90)=516.63µs p(95)=55.92s
+     http_reqs......................: 117588 356.310473/s
+     iteration_duration.............: avg=27.87s   min=100.26ms med=30s     max=1m0s     p(90)=30s      p(95)=58.02s
+     iterations.....................: 117583 356.295322/s
+     vus............................: 1336   min=4        max=19969
+     vus_max........................: 20000  min=20000    max=20000
+
+
+running (5m30.0s), 00000/20000 VUs, 117583 complete and 991 interrupted iterations
+default ✓ [======================================] 00990/20000 VUs  5m0s
+```
+
+- falls over around 2.7k
