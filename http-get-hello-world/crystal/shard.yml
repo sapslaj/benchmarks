@@ -1,0 +1,13 @@
+name: benchmarks-http-get-hello-world-crystal
+version: 0.1.0
+
+authors:
+  - sapslaj <saps.laj@gmail.com>
+
+targets:
+  benchmarks-http-get-hello-world-crystal:
+    main: src/benchmarks-http-get-hello-world-crystal.cr
+
+crystal: 1.8.2
+
+license: MIT

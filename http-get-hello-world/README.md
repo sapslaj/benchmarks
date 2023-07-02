@@ -4,6 +4,35 @@ A server that returns `hello world` as an HTTP 200 response.
 
 ## Results
 
+### `crystal`
+
+```
+     ✓ is status 200
+     ✓ verify homepage text
+
+     checks.........................: 100.00% ✓ 11918236     ✗ 0
+     data_received..................: 602 MB  2.0 MB/s
+     data_sent......................: 477 MB  1.6 MB/s
+     http_req_blocked...............: avg=4.63µs   min=551ns    med=1.89µs   max=116.39ms p(90)=2.51µs   p(95)=2.78µs
+     http_req_connecting............: avg=2.49µs   min=0s       med=0s       max=51.79ms  p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=404.68ms min=48.05µs  med=392.48ms max=1.53s    p(90)=787.96ms p(95)=862.07ms
+       { expected_response:true }...: avg=404.68ms min=48.05µs  med=392.48ms max=1.53s    p(90)=787.96ms p(95)=862.07ms
+     http_req_failed................: 0.00%   ✓ 0            ✗ 5959118
+     http_req_receiving.............: avg=13.64µs  min=4.44µs   med=10.06µs  max=69.39ms  p(90)=15.97µs  p(95)=18.27µs
+     http_req_sending...............: avg=28.9µs   min=2.7µs    med=6.63µs   max=78.93ms  p(90)=12.45µs  p(95)=26.28µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=404.64ms min=32.36µs  med=392.45ms max=1.53s    p(90)=787.93ms p(95)=862.04ms
+     http_reqs......................: 5959118 19798.464501/s
+     iteration_duration.............: avg=505.1ms  min=100.08ms med=492.96ms max=1.63s    p(90)=888.66ms p(95)=962.64ms
+     iterations.....................: 5959118 19798.464501/s
+     vus............................: 18424   min=3          max=19935
+     vus_max........................: 20000   min=20000      max=20000
+
+
+running (5m01.0s), 00000/20000 VUs, 5959118 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
 ### `elxir-phoenix`
 
 ```shell
