@@ -4,12 +4,52 @@ A server that returns `hello world` as an HTTP 200 response.
 
 ## Results
 
+### `elxir-phoenix`
+
+```shell
+$ elixir --version
+Erlang/OTP 25 [erts-13.2.2] [source] [64-bit] [smp:16:16] [ds:16:16:10] [async-threads:1] [jit:ns]
+
+Elixir 1.14.5 (compiled with Erlang/OTP 24)
+```
+
+```
+     ✗ is status 200
+      ↳  99% — ✓ 6113863 / ✗ 4007
+     ✗ verify homepage text
+      ↳  99% — ✓ 6113863 / ✗ 4007
+
+     checks.........................: 99.93%  ✓ 12227726     ✗ 8014
+     data_received..................: 1.4 GB  4.3 MB/s
+     data_sent......................: 489 MB  1.5 MB/s
+     http_req_blocked...............: avg=10.26µs  min=0s       med=2.1µs    max=263.06ms p(90)=2.94µs   p(95)=3.33µs
+     http_req_connecting............: avg=6.91µs   min=0s       med=0s       max=262.94ms p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=378.2ms  min=0s       med=363.83ms max=59.99s   p(90)=608.08ms p(95)=656.82ms
+       { expected_response:true }...: avg=368.39ms min=8.86ms   med=363.95ms max=1.1s     p(90)=608.02ms p(95)=656.57ms
+     http_req_failed................: 0.06%   ✓ 4007         ✗ 6113863
+     http_req_receiving.............: avg=66.37µs  min=0s       med=16.26µs  max=370.27ms p(90)=21.08µs  p(95)=23.39µs
+     http_req_sending...............: avg=302.83µs min=0s       med=7.12µs   max=176.3ms  p(90)=123.27µs p(95)=921.25µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=377.83ms min=0s       med=363.49ms max=59.99s   p(90)=607.72ms p(95)=656.11ms
+     http_reqs......................: 6117870 18539.036892/s
+     iteration_duration.............: avg=499.99ms min=109.52ms med=470.57ms max=1m0s     p(90)=722.2ms  p(95)=777.97ms
+     iterations.....................: 6117870 18539.036892/s
+     vus............................: 112     min=10         max=19988
+     vus_max........................: 20000   min=20000      max=20000
+
+
+running (5m30.0s), 00000/20000 VUs, 6117870 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
+- timeouts started at 18k
+
+### `go`
+
 ```shell
 $ go version
 go version go1.20.4 linux/amd64
 ```
-
-### `go`
 
 ```
      ✓ is status 200
@@ -71,7 +111,7 @@ running (5m30.0s), 00000/20000 VUs, 17952007 complete and 701 interrupted iterat
 default ✓ [======================================] 00702/20000 VUs  5m0s
 ```
 
-- seems to max out at ~18k
+- timeouts at ~18k
 - `2023/07/01 23:54:50 [warn] 31#31: 1024 worker_connections are not enough, reusing connections`
 
 ### `kotlin-spring-boot`
@@ -184,7 +224,7 @@ running (5m00.5s), 00000/20000 VUs, 6524095 complete and 0 interrupted iteration
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
-- falls over at 1k (ulimit?)
+- starts timing out at 1k (ulimit?)
 
 Rerun with `gunicorn -b 127.0.0.1:8080 -w 16 -k uvicorn.workers.UvicornWorker main:app`:
 
@@ -217,7 +257,7 @@ running (5m00.7s), 00000/20000 VUs, 7574324 complete and 0 interrupted iteration
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
-- this time falls over at 12k
+- now timing out at 12k
 
 ```
      ✗ is status 200
@@ -248,7 +288,7 @@ running (5m00.4s), 00000/20000 VUs, 8050615 complete and 0 interrupted iteration
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
-- this time falls over at 16k
+- now timing out at 16k
 
 ### `ruby-sinatra`
 
@@ -286,7 +326,7 @@ running (5m30.0s), 00000/20000 VUs, 117583 complete and 991 interrupted iteratio
 default ✓ [======================================] 00990/20000 VUs  5m0s
 ```
 
-- falls over around 2.7k
+- timeouts at ~2.7k
 
 Rerun with `puma -b tcp://127.0.0.1:8080 -e production -w 16 -t 16:16 --preload`:
 
@@ -319,4 +359,4 @@ running (5m29.5s), 00000/20000 VUs, 929725 complete and 0 interrupted iterations
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
-- falls over around 3.3k
+- timeouts at ~3.3k
