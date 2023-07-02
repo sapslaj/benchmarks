@@ -37,38 +37,37 @@ default ✓ [======================================] 00000/20000 VUs  5m0s
 
 ```
      ✗ is status 200
-      ↳  99% — ✓ 14134192 / ✗ 15120
+      ↳  99% — ✓ 17948654 / ✗ 3353
      ✗ verify homepage text
-      ↳  99% — ✓ 14134192 / ✗ 15120
+      ↳  99% — ✓ 17948654 / ✗ 3353
 
-     checks.........................: 99.89%   ✓ 28268384     ✗ 30240
-     data_received..................: 2.5 GB   8.1 MB/s
-     data_sent......................: 1.1 GB   3.8 MB/s
-     http_req_blocked...............: avg=4.32ms   min=551ns    med=2.15µs  max=784.28ms p(90)=3.12µs   p(95)=3.86µs
-     http_req_connecting............: avg=1.08ms   min=0s       med=0s      max=729.47ms p(90)=0s       p(95)=0s
-     http_req_duration..............: avg=87.54ms  min=0s       med=46.12ms max=1m0s     p(90)=186.21ms p(95)=250.92ms
-       { expected_response:true }...: avg=85.99ms  min=50.26µs  med=46.07ms max=33.04s   p(90)=185.69ms p(95)=249.43ms
-     http_req_failed................: 0.10%    ✓ 15120        ✗ 14134192
-     http_req_receiving.............: avg=111.11µs min=0s       med=14.65µs max=431.24ms p(90)=26.17µs  p(95)=118.06µs
-     http_req_sending...............: avg=6.35ms   min=0s       med=7.47µs  max=1.25s    p(90)=303.41µs p(95)=1.62ms
-     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s       p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=81.07ms  min=0s       med=45.54ms max=59.98s   p(90)=184.21ms p(95)=243.95ms
-     http_reqs......................: 14149312 46554.562817/s
-     iteration_duration.............: avg=205.28ms min=100.09ms med=153.4ms max=1m0s     p(90)=320.94ms p(95)=459.07ms
-     iterations.....................: 14149312 46554.562817/s
-     vus............................: 259      min=6          max=19936
+     checks.........................: 99.98%   ✓ 35897308     ✗ 6706
+     data_received..................: 3.8 GB   11 MB/s
+     data_sent......................: 1.4 GB   4.4 MB/s
+     http_req_blocked...............: avg=3.24ms   min=0s       med=2.31µs  max=15.84s p(90)=3.38µs   p(95)=4.24µs
+     http_req_connecting............: avg=3.22ms   min=0s       med=0s      max=15.84s p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=38.04ms  min=0s       med=14.01ms max=58.99s p(90)=99.69ms  p(95)=139.37ms
+       { expected_response:true }...: avg=37.87ms  min=26.82µs  med=14.02ms max=27.78s p(90)=99.69ms  p(95)=139.37ms
+     http_req_failed................: 0.01%    ✓ 3353         ✗ 17948654
+     http_req_receiving.............: avg=264.72µs min=0s       med=14.63µs max=2.39s  p(90)=72.65µs  p(95)=995.7µs
+     http_req_sending...............: avg=1.3ms    min=0s       med=8.4µs   max=2.05s  p(90)=4ms      p(95)=7.62ms
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s     p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=36.47ms  min=0s       med=12.16ms max=58.99s p(90)=94.35ms  p(95)=135.4ms
+     http_reqs......................: 17952007 54397.295684/s
+     iteration_duration.............: avg=162.51ms min=100.06ms med=128.8ms max=1m0s   p(90)=232.07ms p(95)=270.09ms
+     iterations.....................: 17952007 54397.295684/s
+     vus............................: 1103     min=10         max=19942
      vus_max........................: 20000    min=20000      max=20000
 
 
-running (5m03.9s), 00000/20000 VUs, 14149312 complete and 0 interrupted iterations
-default ✓ [======================================] 00000/20000 VUs  5m0s
+running (5m30.0s), 00000/20000 VUs, 17952007 complete and 701 interrupted iterations
+default ✓ [======================================] 00702/20000 VUs  5m0s
 ```
 
 Notes:
 
 - seems to max out at ~18k
 - `2023/07/01 23:54:50 [warn] 31#31: 1024 worker_connections are not enough, reusing connections`
-- test was run in Docker and I suspect that might have skewed the results
 
 ### `node-express`
 
