@@ -33,6 +33,35 @@ running (5m01.0s), 00000/20000 VUs, 5959118 complete and 0 interrupted iteration
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
+### `deno-fresh`
+
+```
+     ✓ is status 200
+     ✓ verify homepage text
+
+     checks.........................: 100.00% ✓ 7817478      ✗ 0
+     data_received..................: 590 MB  2.0 MB/s
+     data_sent......................: 313 MB  1.0 MB/s
+     http_req_blocked...............: avg=26.37µs  min=811ns    med=2.17µs   max=1.03s   p(90)=2.83µs  p(95)=3.13µs
+     http_req_connecting............: avg=23.91µs  min=0s       med=0s       max=1.03s   p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=670.72ms min=140.46µs med=658.77ms max=4.18s   p(90)=1.27s   p(95)=1.32s
+       { expected_response:true }...: avg=670.72ms min=140.46µs med=658.77ms max=4.18s   p(90)=1.27s   p(95)=1.32s
+     http_req_failed................: 0.00%   ✓ 0            ✗ 3908739
+     http_req_receiving.............: avg=14.23µs  min=5.07µs   med=13µs     max=21.07ms p(90)=17.53µs p(95)=19.63µs
+     http_req_sending...............: avg=19.96µs  min=3.25µs   med=7.37µs   max=51.54ms p(90)=21.83µs p(95)=89.37µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s      p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=670.69ms min=123.92µs med=658.74ms max=4.18s   p(90)=1.27s   p(95)=1.32s
+     http_reqs......................: 3908739 12968.543719/s
+     iteration_duration.............: avg=771.13ms min=100.2ms  med=759.13ms max=4.29s   p(90)=1.37s   p(95)=1.42s
+     iterations.....................: 3908739 12968.543719/s
+     vus............................: 4768    min=5          max=19937
+     vus_max........................: 20000   min=20000      max=20000
+
+
+running (5m01.4s), 00000/20000 VUs, 3908739 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
 ### `elxir-phoenix`
 
 ```shell
