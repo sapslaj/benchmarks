@@ -219,6 +219,73 @@ running (5m02.9s), 00000/20000 VUs, 2121397 complete and 0 interrupted iteration
 default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
+### `php-slim`
+
+```
+     ✗ is status 200
+      ↳  76% — ✓ 312842 / ✗ 98368
+     ✗ verify homepage text
+      ↳  76% — ✓ 312842 / ✗ 98368
+
+     checks.........................: 76.07% ✓ 625684      ✗ 196736
+     data_received..................: 170 MB 514 kB/s
+     data_sent......................: 25 MB  77 kB/s
+     http_req_blocked...............: avg=59.48ms  min=0s       med=2.66µs   max=15.5s  p(90)=3.7µs   p(95)=4.64µs
+     http_req_connecting............: avg=59.48ms  min=0s       med=0s       max=15.5s  p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=952.72ms min=0s       med=21.79ms  max=1m0s   p(90)=87.68ms p(95)=105.15ms
+       { expected_response:true }...: avg=530.26ms min=8.63ms   med=33.36ms  max=59.02s p(90)=91.74ms p(95)=106.27ms
+     http_req_failed................: 23.92% ✓ 98368       ✗ 312842
+     http_req_receiving.............: avg=29.73µs  min=0s       med=27.71µs  max=20.2ms p(90)=40.71µs p(95)=51.76µs
+     http_req_sending...............: avg=10.45µs  min=0s       med=8.66µs   max=23.8ms p(90)=12.11µs p(95)=15.01µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s     p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=952.68ms min=0s       med=21.74ms  max=1m0s   p(90)=87.63ms p(95)=105.1ms
+     http_reqs......................: 411210 1246.011394/s
+     iteration_duration.............: avg=7.96s    min=108.78ms med=152.59ms max=1m0s   p(90)=30s     p(95)=30s
+     iterations.....................: 411210 1246.011394/s
+     vus............................: 875    min=0         max=19994
+     vus_max........................: 20000  min=20000     max=20000
+
+
+running (5m30.0s), 00000/20000 VUs, 411210 complete and 876 interrupted iterations
+default ✓ [======================================] 00875/20000 VUs  5m0s
+```
+
+- getting a "production-like" setup is such a gigantic fucking mess with PHP so there is a lot of overhead.
+- starts timing out at ~2.3k
+
+Running with built-in web server:
+
+```
+     ✗ is status 200
+      ↳  90% — ✓ 539726 / ✗ 55493
+     ✗ verify homepage text
+      ↳  90% — ✓ 539726 / ✗ 55493
+
+     checks.........................: 90.67% ✓ 1079452     ✗ 110986
+     data_received..................: 293 MB 886 kB/s
+     data_sent......................: 44 MB  132 kB/s
+     http_req_blocked...............: avg=197.02ms min=0s       med=58.96µs max=15.49s p(90)=662.82µs p(95)=879.23µs
+     http_req_connecting............: avg=197.01ms min=0s       med=41.37µs max=15.49s p(90)=646.92µs p(95)=861.18µs
+     http_req_duration..............: avg=2.34s    min=0s       med=2.28s   max=1m0s   p(90)=2.39s    p(95)=2.44s
+       { expected_response:true }...: avg=2.17s    min=551.68µs med=2.29s   max=59.66s p(90)=2.4s     p(95)=2.44s
+     http_req_failed................: 9.32%  ✓ 55493       ✗ 539726
+     http_req_receiving.............: avg=36.73µs  min=0s       med=39.16µs max=9.14ms p(90)=50.11µs  p(95)=53.17µs
+     http_req_sending...............: avg=11.67µs  min=0s       med=10.73µs max=2.17ms p(90)=15.59µs  p(95)=18.47µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s      max=0s     p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=2.34s    min=0s       med=2.28s   max=1m0s   p(90)=2.39s    p(95)=2.44s
+     http_reqs......................: 595219 1803.599503/s
+     iteration_duration.............: avg=5.22s    min=100.65ms med=2.4s    max=1m0s   p(90)=16.27s   p(95)=30s
+     iterations.....................: 595219 1803.599503/s
+     vus............................: 4      min=4         max=19937
+     vus_max........................: 20000  min=20000     max=20000
+
+
+running (5m30.0s), 00000/20000 VUs, 595219 complete and 3 interrupted iterations
+default ✓ [======================================] 00002/20000 VUs  5m0s
+```
+
+- starts timing out at ~6.3k
+
 ### `python-fastapi`
 
 ```shell

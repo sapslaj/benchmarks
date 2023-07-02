@@ -1,0 +1,5 @@
+version: '3'
+services:
+  php:
+    build: .
+    network_mode: host
