@@ -85,35 +85,34 @@ OpenJDK 64-Bit Server VM Temurin-17.0.7+7 (build 17.0.7+7, mixed mode, sharing)
 
 ```
      ✗ is status 200
-      ↳  99% — ✓ 15816912 / ✗ 26074
+      ↳  99% — ✓ 7192911 / ✗ 33618
      ✗ verify homepage text
-      ↳  99% — ✓ 15816912 / ✗ 26074
+      ↳  99% — ✓ 7192911 / ✗ 33618
 
-     checks.........................: 99.83%   ✓ 31633824    ✗ 52148
-     data_received..................: 2.0 GB   6.0 MB/s
-     data_sent......................: 1.3 GB   3.8 MB/s
-     http_req_blocked...............: avg=9.67ms   min=0s       med=2.27µs   max=15.63s   p(90)=3.17µs   p(95)=3.71µs
-     http_req_connecting............: avg=9.66ms   min=0s       med=0s       max=15.63s   p(90)=0s       p(95)=0s
-     http_req_duration..............: avg=41.17ms  min=0s       med=7.59ms   max=1m0s     p(90)=42.05ms  p(95)=73.84ms
-       { expected_response:true }...: avg=18.62ms  min=45.55µs  med=7.6ms    max=56.91s   p(90)=41.92ms  p(95)=73.6ms
-     http_req_failed................: 0.16%    ✓ 26074       ✗ 15816912
-     http_req_receiving.............: avg=128.99µs min=0s       med=14.98µs  max=686.19ms p(90)=28.45µs  p(95)=151.22µs
-     http_req_sending...............: avg=411.4µs  min=0s       med=7.88µs   max=663.49ms p(90)=190.42µs p(95)=1.47ms
-     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
-     http_req_waiting...............: avg=40.63ms  min=0s       med=7.36ms   max=1m0s     p(90)=40.39ms  p(95)=71.58ms
-     http_reqs......................: 15842986 48005.58201/s
-     iteration_duration.............: avg=193.64ms min=100.08ms med=109.33ms max=1m0s     p(90)=169.7ms  p(95)=211.19ms
-     iterations.....................: 15842986 48005.58201/s
-     vus............................: 3250     min=7         max=19938
-     vus_max........................: 20000    min=20000     max=20000
+     checks.........................: 99.53%  ✓ 14385822     ✗ 67236
+     data_received..................: 908 MB  2.8 MB/s
+     data_sent......................: 576 MB  1.7 MB/s
+     http_req_blocked...............: avg=8.3ms    min=0s      med=2.04µs   max=15.5s   p(90)=2.89µs   p(95)=3.22µs
+     http_req_connecting............: avg=8.29ms   min=0s      med=0s       max=15.49s  p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=204.04ms min=0s      med=201.31ms max=1m0s    p(90)=231.12ms p(95)=292.59ms
+       { expected_response:true }...: avg=177.37ms min=61.82µs med=201.44ms max=56.05s  p(90)=231.1ms  p(95)=290.2ms
+     http_req_failed................: 0.46%   ✓ 33618        ✗ 7192911
+     http_req_receiving.............: avg=18.95µs  min=0s      med=15.49µs  max=55.27ms p(90)=22.12µs  p(95)=27.05µs
+     http_req_sending...............: avg=13.51µs  min=0s      med=6.82µs   max=55.65ms p(90)=10.2µs   p(95)=17.56µs
+     http_req_tls_handshaking.......: avg=0s       min=0s      med=0s       max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=204ms    min=0s      med=201.29ms max=1m0s    p(90)=231.09ms p(95)=292.55ms
+     http_reqs......................: 7226529 21896.990082/s
+     iteration_duration.............: avg=434.68ms min=100.1ms med=301.76ms max=1m0s    p(90)=332.12ms p(95)=420.58ms
+     iterations.....................: 7226529 21896.990082/s
+     vus............................: 1789    min=5          max=19937
+     vus_max........................: 20000   min=20000      max=20000
 
 
-running (5m30.0s), 00000/20000 VUs, 15842986 complete and 2599 interrupted iterations
-default ✓ [======================================] 02598/20000 VUs  5m0s
+running (5m30.0s), 00000/20000 VUs, 7226529 complete and 1362 interrupted iterations
+default ✓ [======================================] 01361/20000 VUs  5m0s
 ```
 
-- my machine was completely locked up during the test, so unsure where things might have gone wrong.
-  - Seems like it _hammers_ CPU because the fans started blasting. More telemetry required.
+- starts timing out at 10k
 
 ### `node-express`
 
