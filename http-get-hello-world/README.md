@@ -69,3 +69,32 @@ Notes:
 - seems to max out at ~18k
 - `2023/07/01 23:54:50 [warn] 31#31: 1024 worker_connections are not enough, reusing connections`
 - test was run in Docker and I suspect that might have skewed the results
+
+### `node-express`
+
+```
+     ✓ is status 200
+     ✓ verify homepage text
+
+     checks.........................: 100.00% ✓ 4242794     ✗ 0
+     data_received..................: 507 MB  1.7 MB/s
+     data_sent......................: 170 MB  560 kB/s
+     http_req_blocked...............: avg=8.11µs  min=631ns    med=1.58µs  max=59.61ms p(90)=2.42µs  p(95)=2.73µs
+     http_req_connecting............: avg=6.11µs  min=0s       med=0s      max=59.57ms p(90)=0s      p(95)=0s
+     http_req_duration..............: avg=1.32s   min=101.65µs med=1.32s   max=11.79s  p(90)=2.39s   p(95)=2.57s
+       { expected_response:true }...: avg=1.32s   min=101.65µs med=1.32s   max=11.79s  p(90)=2.39s   p(95)=2.57s
+     http_req_failed................: 0.00%   ✓ 0           ✗ 2121397
+     http_req_receiving.............: avg=14.83µs min=6.02µs   med=13.87µs max=5.53ms  p(90)=18.63µs p(95)=22.36µs
+     http_req_sending...............: avg=6.3µs   min=3µs      med=5.45µs  max=2.26ms  p(90)=8.13µs  p(95)=8.99µs
+     http_req_tls_handshaking.......: avg=0s      min=0s       med=0s      max=0s      p(90)=0s      p(95)=0s
+     http_req_waiting...............: avg=1.32s   min=87.79µs  med=1.32s   max=11.79s  p(90)=2.39s   p(95)=2.57s
+     http_reqs......................: 2121397 7004.277412/s
+     iteration_duration.............: avg=1.42s   min=100.14ms med=1.42s   max=11.89s  p(90)=2.49s   p(95)=2.67s
+     iterations.....................: 2121397 7004.277412/s
+     vus............................: 5859    min=5         max=19938
+     vus_max........................: 20000   min=20000     max=20000
+
+
+running (5m02.9s), 00000/20000 VUs, 2121397 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
