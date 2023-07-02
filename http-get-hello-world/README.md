@@ -247,3 +247,36 @@ default ✓ [======================================] 00990/20000 VUs  5m0s
 ```
 
 - falls over around 2.7k
+
+Rerun with `puma -b tcp://127.0.0.1:8080 -e production -w 16 -t 16:16 --preload`:
+
+```
+     ✗ is status 200
+      ↳  90% — ✓ 843678 / ✗ 86047
+     ✗ verify homepage text
+      ↳  90% — ✓ 843678 / ✗ 86047
+
+     checks.........................: 90.74% ✓ 1687356     ✗ 172094
+     data_received..................: 158 MB 479 kB/s
+     data_sent......................: 69 MB  208 kB/s
+     http_req_blocked...............: avg=282.03ms min=0s       med=2.92µs   max=15.5s   p(90)=105.75µs p(95)=1.01s
+     http_req_connecting............: avg=282.03ms min=0s       med=0s       max=15.5s   p(90)=72.16µs  p(95)=1.01s
+     http_req_duration..............: avg=683.97ms min=0s       med=505.29µs max=1m0s    p(90)=3.19s    p(95)=3.75s
+       { expected_response:true }...: avg=418.02ms min=157.79µs med=525.08µs max=56.7s   p(90)=997.21ms p(95)=3.74s
+     http_req_failed................: 9.25%  ✓ 86047       ✗ 843678
+     http_req_receiving.............: avg=30.11µs  min=0s       med=23.57µs  max=12.14ms p(90)=41.59µs  p(95)=59.64µs
+     http_req_sending...............: avg=17.76µs  min=0s       med=10.62µs  max=13.02ms p(90)=22.96µs  p(95)=34.61µs
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s      p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=683.92ms min=0s       med=458.39µs max=1m0s    p(90)=3.19s    p(95)=3.75s
+     http_reqs......................: 929725 2821.978976/s
+     iteration_duration.............: avg=3.36s    min=100.2ms  med=100.92ms max=1m0s    p(90)=11.29s   p(95)=30s
+     iterations.....................: 929725 2821.978976/s
+     vus............................: 5      min=5         max=19944
+     vus_max........................: 20000  min=20000     max=20000
+
+
+running (5m29.5s), 00000/20000 VUs, 929725 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
+- falls over around 3.3k
