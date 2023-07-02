@@ -80,7 +80,41 @@ default ✓ [======================================] 00000/20000 VUs  5m0s
 
 ### `nginx`
 
-Test was done using `nginx` from Ubuntu repos (`1.18.0-6ubuntu14.3`) due to Docker proxy overhead skewing results.
+Running with host networking because Docker proxy overhead skews results
+
+```
+     ✗ is status 200
+      ↳  99% — ✓ 12552785 / ✗ 2280
+     ✗ verify homepage text
+      ↳  99% — ✓ 12552785 / ✗ 2280
+
+     checks.........................: 99.98%   ✓ 25105570     ✗ 4560
+     data_received..................: 2.5 GB   8.0 MB/s
+     data_sent......................: 1.0 GB   3.2 MB/s
+     http_req_blocked...............: avg=8.81ms   min=0s       med=2.13µs   max=15.65s   p(90)=2.84µs   p(95)=3.22µs
+     http_req_connecting............: avg=7.15ms   min=0s       med=0s       max=15.63s   p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=118.92ms min=0s       med=86.5ms   max=30.17s   p(90)=286.36ms p(95)=349.53ms
+       { expected_response:true }...: avg=118.68ms min=30.16µs  med=86.51ms  max=20.12s   p(90)=286.35ms p(95)=349.47ms
+     http_req_failed................: 0.01%    ✓ 2280         ✗ 12552785
+     http_req_receiving.............: avg=115.99µs min=0s       med=14.04µs  max=631.95ms p(90)=23.86µs  p(95)=100.91µs
+     http_req_sending...............: avg=2.5ms    min=0s       med=7.5µs    max=15.61s   p(90)=2.18ms   p(95)=4.59ms
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=116.29ms min=0s       med=85.58ms  max=30.17s   p(90)=284.91ms p(95)=346.98ms
+     http_reqs......................: 12555065 39895.498043/s
+     iteration_duration.............: avg=237.79ms min=100.07ms med=195.21ms max=30.68s   p(90)=399.6ms  p(95)=470.62ms
+     iterations.....................: 12555065 39895.498043/s
+     vus............................: 14       min=8          max=19940
+     vus_max........................: 20000    min=20000      max=20000
+
+
+running (5m14.7s), 00000/20000 VUs, 12555065 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
+
+- timeouts at ~17k
+- `2022/07/01 23:54:50 [warn] 31#31: 1024 worker_connections are not enough, reusing connections`
+
+Run with `nginx` from Ubuntu repos (`1.18.0-6ubuntu14.3`):
 
 ```
      ✗ is status 200
@@ -110,9 +144,6 @@ Test was done using `nginx` from Ubuntu repos (`1.18.0-6ubuntu14.3`) due to Dock
 running (5m30.0s), 00000/20000 VUs, 17952007 complete and 701 interrupted iterations
 default ✓ [======================================] 00702/20000 VUs  5m0s
 ```
-
-- timeouts at ~18k
-- `2023/07/01 23:54:50 [warn] 31#31: 1024 worker_connections are not enough, reusing connections`
 
 ### `kotlin-spring-boot`
 
