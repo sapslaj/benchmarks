@@ -458,3 +458,37 @@ default ✓ [======================================] 00000/20000 VUs  5m0s
 ```
 
 - timeouts at ~3.3k
+
+### `rust-actix`
+
+```shell
+$ cargo --version
+cargo 1.70.0 (ec8a8a0ca 2023-04-25)
+```
+
+```
+     ✓ is status 200
+     ✓ verify homepage text
+
+     checks.........................: 100.00%  ✓ 35411916     ✗ 0
+     data_received..................: 1.6 GB   5.2 MB/s
+     data_sent......................: 1.4 GB   4.7 MB/s
+     http_req_blocked...............: avg=24.25µs  min=601ns    med=2.17µs   max=322.3ms  p(90)=3.13µs   p(95)=3.7µs
+     http_req_connecting............: avg=20.59µs  min=0s       med=0s       max=322.25ms p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=42.65ms  min=33.23µs  med=22.6ms   max=1.83s    p(90)=112.63ms p(95)=137.35ms
+       { expected_response:true }...: avg=42.65ms  min=33.23µs  med=22.6ms   max=1.83s    p(90)=112.63ms p(95)=137.35ms
+     http_req_failed................: 0.00%    ✓ 0            ✗ 17705958
+     http_req_receiving.............: avg=166.74µs min=3.91µs   med=13.34µs  max=199.27ms p(90)=28.5µs   p(95)=164µs
+     http_req_sending...............: avg=726.21µs min=2.85µs   med=7.69µs   max=325.28ms p(90)=1.12ms   p(95)=4.1ms
+     http_req_tls_handshaking.......: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=41.76ms  min=21.8µs   med=21.47ms  max=1.83s    p(90)=111.12ms p(95)=135.33ms
+     http_reqs......................: 17705958 58979.489784/s
+     iteration_duration.............: avg=161.03ms min=100.06ms med=135.39ms max=2.11s    p(90)=245.67ms p(95)=307.13ms
+     iterations.....................: 17705958 58979.489784/s
+     vus............................: 16901    min=3          max=19936
+     vus_max........................: 20000    min=20000      max=20000
+
+
+running (5m00.2s), 00000/20000 VUs, 17705958 complete and 0 interrupted iterations
+default ✓ [======================================] 00000/20000 VUs  5m0s
+```
